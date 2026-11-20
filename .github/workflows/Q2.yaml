@@ -1,0 +1,36 @@
+name: Q2
+on:
+  push:
+    paths:
+      - 'XYZ.txt'
+      - 'README.md'
+      - '.github/workflows/Q2.yaml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: archives
+  cancel-in-progress: false
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recuperation du depot
+        uses: actions/checkout@v4
+      - name: Creation de Q2_archive_XYZ.txt
+        run: |
+          {
+            echo "Nom et prenom : Enzo Dumont"
+            echo "Date et heure d'execution : $(TZ=Europe/Paris date '+%d/%m/%Y %H:%M:%S')"
+            echo "Contenu de XYZ.txt :"
+            cat XYZ.txt
+            echo "Taille de XYZ.txt : $(wc -c < XYZ.txt) octets"
+          } > Q2_archive_XYZ.txt
+      - name: Commit et push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Q2_archive_XYZ.txt
+          git commit -m "Q2 : archive de XYZ.txt avec metadonnees" || echo "rien a commiter"
+          git pull --rebase origin main
+          git push
