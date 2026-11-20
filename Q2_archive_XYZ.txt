@@ -1,0 +1,7 @@
+Nom et prenom : Enzo Dumont
+Date et heure d'execution : 20/11/2026 15:51:52
+Contenu de XYZ.txt :
+Ceci est le contenu du fichier XYZ.txt
+Premiere ligne de test
+Deuxieme ligne de test
+Taille de XYZ.txt : 85 octets
