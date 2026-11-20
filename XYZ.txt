@@ -1,0 +1,3 @@
+Ceci est le contenu du fichier XYZ.txt
+Premiere ligne de test
+Deuxieme ligne de test
