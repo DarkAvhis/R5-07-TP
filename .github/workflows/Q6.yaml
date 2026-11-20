@@ -1,0 +1,47 @@
+name: Q6
+on:
+  push:
+    paths:
+      - 'Q6.java'
+      - '.github/workflows/Q6.yaml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: archives
+  cancel-in-progress: false
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recuperation du depot
+        uses: actions/checkout@v4
+      - name: Creation de l'archive horodatee
+        run: |
+          NOUVEAU="Q6_archive_$(TZ=Europe/Paris date +%d-%m-%Y-%H%M%S).txt"
+          {
+            echo "Nom et prenom : Enzo Dumont"
+            cat Q6.java
+            echo "Taille de Q6.java (caracteres, lignes) : $(wc -m < Q6.java) $(wc -l < Q6.java)"
+            wc -m -l Q6.java
+          } > "$NOUVEAU"
+          echo "$NOUVEAU" > /tmp/nouveau.txt
+      - name: Comparaison avec la version precedente
+        run: |
+          NOUVEAU=$(cat /tmp/nouveau.txt)
+          LISTE=$(ls Q6_archive_*.txt | sed 's/^Q6_archive_//; s/\.txt$//' | sort -t- -k3,3n -k2,2n -k1,1n -k4,4n)
+          PRECEDENT=$(echo "$LISTE" | tail -n 2 | head -n 1)
+          if [ "$(echo "$LISTE" | wc -l)" -lt 2 ]; then
+            echo "Premiere archive : pas de version precedente a comparer" > "Q6_différences.txt"
+          else
+            diff "Q6_archive_${PRECEDENT}.txt" "$NOUVEAU" > "Q6_différences.txt" || true
+            [ -s "Q6_différences.txt" ] || echo "Aucune difference" > "Q6_différences.txt"
+          fi
+      - name: Commit et push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Q6_archive_*.txt "Q6_différences.txt"
+          git commit -m "Q6 : archive horodatee et differences" || echo "rien a commiter"
+          git pull --rebase origin main
+          git push
