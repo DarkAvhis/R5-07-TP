@@ -1,0 +1,32 @@
+name: Q4
+on:
+  push:
+    paths:
+      - 'Q4.java'
+      - '.github/workflows/Q4.yaml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: archives
+  cancel-in-progress: false
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recuperation du depot
+        uses: actions/checkout@v4
+      - name: Creation de l'archive
+        run: |
+          {
+            echo "Nom et prenom : Enzo Dumont"
+            cat Q4.java
+          } > "Q4_archive_$(date +%d-%m-%Y).txt"
+      - name: Commit et push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Q4_archive_*.txt
+          git commit -m "Q4 : archive de Q4.java" || echo "rien a commiter"
+          git pull --rebase origin main
+          git push
