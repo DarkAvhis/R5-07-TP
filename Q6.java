@@ -1,3 +1,4 @@
+// Q6 : version modifiee pour tester la comparaison
 public class Q6
 {
     public static void main( String[] arguments )
