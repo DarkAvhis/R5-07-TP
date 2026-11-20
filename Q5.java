@@ -1,0 +1,19 @@
+public class Q5
+{
+    public static void main( String[] arguments )
+    {
+        int nombre = Integer.parseInt( arguments[ 0 ] );
+
+        for ( int taille = nombre; taille >= 1; taille-- )
+        {
+            StringBuilder ligne = new StringBuilder();
+
+            for ( int valeur = taille; valeur >= 1; valeur-- )
+            {
+                ligne.append( valeur );
+            }
+
+            System.out.println( ligne );
+        }
+    }
+}
