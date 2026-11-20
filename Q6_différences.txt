@@ -1,1 +1,8 @@
-Premiere archive : pas de version precedente a comparer
+1a2
+> // Q6 : version modifiee pour tester la comparaison
+21,22c22,23
+< Taille de Q6.java (caracteres, lignes) : 445 19
+<  19 445 Q6.java
+---
+> Taille de Q6.java (caracteres, lignes) : 497 20
+>  20 497 Q6.java
