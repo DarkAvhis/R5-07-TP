@@ -10,7 +10,7 @@ public class Q5
 
             for ( int valeur = taille; valeur >= 1; valeur-- )
             {
-                ligne.append( valeur );
+                ligne.append( "x" );
             }
 
             System.out.println( ligne );
