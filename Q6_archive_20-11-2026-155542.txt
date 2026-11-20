@@ -1,0 +1,22 @@
+Nom et prenom : Enzo Dumont
+public class Q6
+{
+    public static void main( String[] arguments )
+    {
+        int nombre = Integer.parseInt( arguments[ 0 ] );
+
+        for ( int taille = 1; taille <= nombre; taille++ )
+        {
+            StringBuilder ligne = new StringBuilder();
+
+            for ( int valeur = taille; valeur >= 1; valeur-- )
+            {
+                ligne.append( "x" );
+            }
+
+            System.out.println( ligne );
+        }
+    }
+}
+Taille de Q6.java (caracteres, lignes) : 445 19
+ 19 445 Q6.java
