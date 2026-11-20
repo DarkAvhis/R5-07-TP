@@ -4,7 +4,7 @@ public class Q5
     {
         int nombre = Integer.parseInt( arguments[ 0 ] );
 
-        for ( int taille = nombre; taille >= 1; taille-- )
+        for ( int taille = 1; taille <= nombre; taille++ )
         {
             StringBuilder ligne = new StringBuilder();
 
